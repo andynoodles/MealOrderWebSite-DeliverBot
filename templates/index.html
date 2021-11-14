@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title>DAAN Food Court</title>
+<div class=welcome>
+    <h1>Welcome to DAAN Food court</h1>
+</div>
+{% endblock %}
+
+
+{% block body %}
+<div class=form>
+    <form action="/" method="POST">
+        <select class="select" name="table" class=table_num>
+            <option value="0">Choose your Table number</option>
+            <option value="1">No.1</option>
+            <option value="2">No.2</option>
+            <option value="3">No.3</option>
+            <option value="4">No.4</option>  
+        </select>
+        </br>
+        <select class="select" name="food" class=food>
+            <option value="0">Choose your Meal</option>
+            <option value="Hot_dog">Hot Dog</option>
+            <option value="Hamburger">Hamburger</option>
+            <option value="Black_tea">Black Tea</option> 
+        </select>
+        </br>
+    <input class="button"type="submit" value="Submit order">    
+    </form>
+</div>
+<div>
+    <a href="/adminpage">Go adminpage</a>
+</div>
+{% endblock %}

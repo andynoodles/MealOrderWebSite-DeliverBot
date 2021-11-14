@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<meta http-equiv="refresh" content="5">
+<title>DAAN Food Court</title>
+<div class=welcome>
+    <h1>Admin Page</h1>
+</div>
+{% endblock %}
+
+
+{% block body %}
+<div>
+    {% for TableNum in TableNum %}
+    <tr>
+        <td>{{ TableNum.table }}</td>
+        <td>{{ TableNum.meal }}</td>
+        <td>{{ TableNum.date_created.time() }}</td>
+    </tr>
+    <tr>
+        <td><a href="/mqttstart/{{TableNum.id}}">Send Request</a></td>
+        <td><a href="/mqttfinished/{{TableNum.id}}">Delete order</a></td>
+        </br>
+    </tr>
+    {% endfor %}
+</div>
+<div>
+    <a href="/">Go homepage</a>
+</div>
+{% endblock %}

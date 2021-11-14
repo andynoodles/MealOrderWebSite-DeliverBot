@@ -1,0 +1,62 @@
+head, html {
+    margin: 0;
+    font-family: Arial;
+    background-color: rgb(255, 179, 79);
+}
+
+body{
+    margin: 10;
+    font-family: Arial;
+    background-color: rgb(255, 179, 79);
+}
+
+td {
+    margin: 100px;
+    padding: 10px;
+}
+
+
+
+.form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.select{
+    border: 100px;
+    padding: 12px 32px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+.button:hover {
+    background-color: #367c38;
+}
+
+/* unvisited link */
+a:link {
+    color: orange;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgb(255, 120, 71);
+}
+  
+a:visited {
+    color: rgb(85, 47, 0);
+}
+
+a:hover {
+    color: rgb(0, 0, 0);
+}
