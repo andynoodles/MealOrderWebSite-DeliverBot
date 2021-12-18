@@ -46,17 +46,18 @@ td {
 
 /* unvisited link */
 a:link {
+    margin: 5px;
     color: orange;
     text-decoration: none;
-    font-size: 20px;
-    padding: 5px;
+    font-size: 18px;
+    padding: 3px;
     background-color: rgb(255, 120, 71);
 }
   
 a:visited {
-    color: rgb(85, 47, 0);
+    color: rgb(0, 0, 0);
 }
 
 a:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(238, 255, 0);
 }
