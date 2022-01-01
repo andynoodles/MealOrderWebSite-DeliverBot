@@ -15,14 +15,23 @@
     <tr>
         <td>{{ TableNum.table }}</td>
         <td>{{ TableNum.meal }}</td>
-        <td>{{ TableNum.date_created.time()}}</td>
+        <td>{{ TableNum.date_created.strftime('%m-%d %H:%M:%S')}}</td>
     </tr>
     <tr>
-        <td><a href="/mqttstart/{{TableNum.id}}">Send Request</a></td>
+        <td><a href="/mqttstart/{{TableNum.id}}/{{TableNum.table}}">Send Request</a></td>
         <td><a href="/mqttfinished/{{TableNum.id}}">Delete order</a></td></br>
         </br>
     </tr>
     {% endfor %}
+    <tr>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{ msg }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </tr>
 </div>
 <div>
     <a href="/">Go homepage</a>

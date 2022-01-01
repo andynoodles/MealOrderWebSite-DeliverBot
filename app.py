@@ -5,12 +5,16 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
-
+import paho.mqtt.client as mqtt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
+
+mqttc=mqtt.Client()
+mqttc.connect("broker.emqx.io",1883,60)
+mqttc.loop_start()
 
 loginmanager= LoginManager()
 loginmanager.init_app(app)
@@ -27,7 +31,7 @@ class Todo(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
-        return '<Task %r>' % self.id
+        return '%r' % self.id
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -99,18 +103,32 @@ def adminpage():
     
     
     
-@app.route('/mqttstart/<int:id>')
-def mqttstart(id):
-    return  '<h1>mqttstart</h1>'
-            
+@app.route('/mqttstart/<id>/<table>')
+@login_required
+def mqttstart(id,table):
+    id = Todo.query.get_or_404(id)
+    if table == "1":
+        mqttc.publish("flaskmqtt","1")
+    if table == "2":
+        mqttc.publish("flaskmqtt","2")
+    if table == "3":
+        mqttc.publish("flaskmqtt","3")
+    if table == "4":
+        mqttc.publish("flaskmqtt","4")
+    flash(f"Order have been sent to the bot. Order id:{id}")
+    return  redirect(url_for('adminpage'))
+
+
+
 @app.route('/mqttfinished/<int:id>')
+@login_required
 def mqttfinished(id):
     order_to_delete = Todo.query.get_or_404(id)
 
     try:
         db.session.delete(order_to_delete)
         db.session.commit()
-        return redirect('/adminpage')
+        return redirect(url_for('adminpage'))
     except:
         return 'There was a problem deleting that order'
 
